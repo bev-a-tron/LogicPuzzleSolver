@@ -1,0 +1,10 @@
+1. The runner who finished with a time of 3 min, 14 sec is Deandre.
+Of the baker who made oatmeal raisin cookies and Rodney, one completed the race at 3 min, 8 sec and the other has Chase as a surname.
+2. The person whose last name is Chase finished before the baker who made oatmeal raisin cookies.
+3. The person whose last name is Velez is not Samuel or Charlotte.
+4. The baker who made black and white cookies finished before the person whose last name is Huber.
+5. The runner who finished with a time of 3 min, 19 sec has Velez as a surname.
+6. The person whose last name is Summers finished before the person whose last name is Chase.
+7. Either the baker who made almond cookies or the baker who made oatmeal raisin cookies is Deandre.
+8. The 5 people were Charlotte, the runner who finished with a time of 3 min, 5 sec, the baker who made chocolate chip cookies, the person whose last name is Huber, and Sierra.
+9. The baker who made chocolate chip cookies is not Rodney.
