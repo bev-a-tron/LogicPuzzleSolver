@@ -39,12 +39,15 @@ solution( X ) :-
 	constraint2( Constrained2 ),
 	member( Constrained3, X ),
 	constraint3( Constrained3 ),
-	all_Nth_members( X, 2, Last),
-	permutation( Last, [ chase, huber, larson, summers, velez ] ),
-	all_Nth_members( X, 3, Cookies),
-	permutation( Cookies, [ almond, black_and_white, chocolate_chip, gingerbread, oatmeal_raisin ] ),
-	all_Nth_members( X, 4, Time),
-	permutation( Time, [ 179, 185, 188, 194, 199 ] ).
+	member( Constrained7A, X ),
+	member( Constrained7B, X ),
+	constraint4( Constrained7A, Constrained7B ),
+	all_Nth_members( X, 2, ListOfLastNames),
+	permutation( ListOfLastNames, [ chase, huber, larson, summers, velez ] ),
+	all_Nth_members( X, 3, ListOfCookies),
+	permutation( ListOfCookies, [ almond, black_and_white, chocolate_chip, gingerbread, oatmeal_raisin ] ),
+	all_Nth_members( X, 4, ListOfTimes),
+	permutation( ListOfTimes, [ 179, 185, 188, 194, 199 ] ).
 
 
 all_Nth_members( [], _, [] ).
@@ -52,10 +55,42 @@ all_Nth_members( [H|Rest], N, [This|RestFiltered] ) :-
         nth1( N, H, This ),
         all_Nth_members( Rest, N, RestFiltered ).
 
-constraint1( [A, _, _, D] ) :-
-	one_set( [A, _, _, D] ),
-	A = deandre,
-	D = 194.
+constraint1( [First, _, _, Time] ) :-
+	one_set( [First, _, _, Time] ),
+	First = deandre,
+	Time = 194.
+
+constraint2( [First, _, Cookie, _] ) :-
+	one_set([First, _, Cookie, _] ),
+	First = rodney,
+	Cookie \= oatmeal_raisin.
+
+constraint3( [_, Last, _, Time] ) :-
+	one_set([_, Last, _, Time] ),
+	Last = chase,
+	Time \= 188.
+	
+constraint4( [_, Last, Cookie, _] ) :-
+	one_set( [_, Last, Cookie, _] ),
+	Last = chase,
+	Cookie \= oatmeal_raisin.
+
+constraint5( [First, Last, _, _] ) :-
+	one_set( [First, Last, _, _] ),
+	First = samuel,
+	Last \= velez.
+
+constraint6( [First, Last, _, _] ) :-
+	one_set( [First, Last, _, _] ),
+	First = charlotte,
+	Last \= velez.
+
+constraint7( [_, Last, _, Time1], [_, _, Cookie, Time2]) :-
+	one_set( [_, Last, _, Time1] ),
+	one_set( [_, _, Cookie, Time2] ),
+	Last = chase,
+	Cookie = oatmeal_raisin,
+	Time1 < Time2.
 
 one_set( [A, B, C, D] ) :-
 	first(A),
