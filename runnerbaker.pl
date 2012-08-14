@@ -25,6 +25,13 @@ time(188).
 time(194).
 time(199).
 
+
+one_set( [A, B, C, D] ) :-
+	first(A),
+	last(B),
+	cookie(C),
+	time(D).
+
 solution( X ) :-
 	X = [ A, B, C, D, M ],
 	X = [ [charlotte,_,_,_], [deandre,_,_,_], [rodney,_,_,_], [samuel,_,_,_], [sierra,_,_,_] ],
@@ -59,7 +66,15 @@ solution( X ) :-
 	constraint10( Constrained10A, Constrained10B ),
 	member( Constrained11, X ),
 	constraint11( Constrained11 ),
+	member( Constrained12, X ),
+	constraint12( Constrained12 ),
 
+	member( Constrained13a, X ),
+	member( Constrained13b, X ),
+	member( Constrained13c, X ),
+	member( Constrained13d, X ),
+	member( Constrained13e, X ),
+	constraint13( Constrained13a, Constrained13b, Constrained13c, Constrained13d, Constrained13e )
 
 	all_Nth_members( X, 2, ListOfLastNames),
 	permutation( ListOfLastNames, [ chase, huber, larson, summers, velez ] ),
@@ -73,6 +88,39 @@ all_Nth_members( [], _, [] ).
 all_Nth_members( [H|Rest], N, [This|RestFiltered] ) :-
         nth1( N, H, This ),
         all_Nth_members( Rest, N, RestFiltered ).
+
+
+constraint13( Set1, Set2, Set3, Set4, Set5 ) :-
+	Set1 \= Set2,
+	Set2 \= Set3,
+	Set3 \= Set4,
+	Set4 \= Set5,
+	Set1 = [charlotte, _, _, _],
+	one_set( Set1 ),
+	Set2 = [sierra, _, _, _],
+	one_set( Set2 ),
+	Set3 = [_, huber, _, _],
+	one_set( Set3 ),
+	Set4 = [_, _, chocolate_chip, _],
+	one_set( Set4 ),
+	Set5 = [_, _, _, 185],
+	one_set( Set5 ).
+
+%constraint13( [First, _, _, _] ),
+%	one_set( [First, _, _, _] ),
+%	First = charlotte.
+%constraint13( [First, _, _, _] ) :-
+%	one_set( [First, _, _, _] ),
+%	First = sierra.
+%constraint13( [_, Last, _, _] ) :-
+%	one_set( [_, Last, _, _] ),
+%	Last = huber.
+%constraint13( [_, _, Cookie, _] ) :-
+%	one_set( [_, _, Cookie, _] ),
+%	Cookie = chocolate_chip.
+%constraint13( [_, _, _, Time] ) :-
+%	one_set( [_, _, _, Time] ),
+%	Time = 185.
 
 constraint1( [First, _, _, Time] ) :-
 	one_set( [First, _, _, Time] ),
@@ -154,7 +202,7 @@ constraint12( [First, _, Cookie, _] ) :-
 %%%%%%%%%%%%
 % THIS PART SUCKS
 %
-
+*/
 constraint13( [First, _, Cookie, _] ) :-
 	one_set( [First, _, Cookie, _] ),
 	First = charlotte,
@@ -198,9 +246,4 @@ constraint15( [_, Last, _, Time] ) :-
 %
 % END OF SUCKVILLE
 %%%%%
-
-one_set( [A, B, C, D] ) :-
-	first(A),
-	last(B),
-	cookie(C),
-	time(D).
+*/
