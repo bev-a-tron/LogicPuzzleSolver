@@ -39,9 +39,28 @@ solution( X ) :-
 	constraint2( Constrained2 ),
 	member( Constrained3, X ),
 	constraint3( Constrained3 ),
+	member( Constrained4, X ),
+	constraint3( Constrained4 ),
+	member( Constrained5, X ),
+	constraint3( Constrained5 ),
+	member( Constrained6, X ),
+	constraint3( Constrained6 ),
+
 	member( Constrained7A, X ),
 	member( Constrained7B, X ),
-	constraint4( Constrained7A, Constrained7B ),
+	constraint7( Constrained7A, Constrained7B ),
+	member( Constrained8A, X ),
+	member( Constrained8B, X ),
+	constraint8( Constrained8A, Constrained8B ),
+	member( Constrained9, X ),
+	constraint9( Constrained9 ),
+	member( Constrained10A, X ),
+	member( Constrained10B, X ),
+	constraint10( Constrained10A, Constrained10B ),
+	member( Constrained11, X ),
+	constraint11( Constrained11 ),
+
+
 	all_Nth_members( X, 2, ListOfLastNames),
 	permutation( ListOfLastNames, [ chase, huber, larson, summers, velez ] ),
 	all_Nth_members( X, 3, ListOfCookies),
@@ -91,6 +110,94 @@ constraint7( [_, Last, _, Time1], [_, _, Cookie, Time2]) :-
 	Last = chase,
 	Cookie = oatmeal_raisin,
 	Time1 < Time2.
+
+constraint8( [_, Last, _, Time1], [_, _, Cookie, Time2]) :-
+	one_set( [_, Last, _, Time1] ),
+	one_set( [_, _, Cookie, Time2] ),
+	Last = huber,
+	Cookie = black_and_white,
+	Time2 < Time1.
+
+%constraint9( [_, velez, _, 199] ) :-
+%	one_set( [_, velez, _, 199] ).
+
+constraint9( [_, Last, _, Time] ) :-
+	one_set( [_, Last, _, Time] ),
+	Last = velez,
+	Time = 199.
+
+%constraint9( [_, velez, _, 199] ).	
+
+constraint10( [_, Last1, _, Time1], [_, Last2, _, Time2]) :-
+	one_set( [_, Last1, _, Time1] ),
+	one_set( [_, Last2, _, Time2] ),
+	Last1 = summers,
+	Last2 = chase,
+	Time1 < Time2.
+
+constraint11( [First, _, Cookie, _] ) :-
+	one_set( [First, _, Cookie, _] ),
+	First = deandre,
+	Cookie = almond.
+
+constraint11( [First, _, Cookie, _] ) :-
+	one_set( [First, _, Cookie, _] ),
+	First = deandre,
+	Cookie = oatmeal_raisin.
+
+constraint12( [First, _, Cookie, _] ) :-
+	one_set( [First, _, Cookie, _] ),
+	First = rodney,
+	Cookie = chocolate_chip.
+
+
+%%%%%%%%%%%%
+% THIS PART SUCKS
+%
+
+constraint13( [First, _, Cookie, _] ) :-
+	one_set( [First, _, Cookie, _] ),
+	First = charlotte,
+	Cookie \= chocolate_chip.
+
+constraint14( [First, _, Cookie, _] ) :-
+	one_set( [First, _, Cookie, _] ),
+	First = sierra,
+	Cookie \= chocolate_chip.
+
+constraint15( [_, Last, Cookie, _] ) :-
+	one_set( [_, Last, Cookie, _] ),
+	Last = huber,
+	Cookie \= chocolate_chip.
+
+constraint15( [_, _, Cookie, Time] ) :-
+	one_set( [_, _, Cookie, Time] ),
+	Time = 185,
+	Cookie \= chocolate_chip.
+
+constraint15( [First, Last, _, _] ) :-
+	one_set( [First, Last, _, _] ),
+	First = charlotte,
+	Last \= huber.
+
+constraint15( [First, Last, _, _] ) :-
+	one_set( [First, Last, _, _] ),
+	First = sierra,
+	Last \= huber.
+
+constraint15( [_, Last, _, Time] ) :-
+	one_set( [First, Last, _, _] ),
+	Time = 185,
+	Last \= huber.
+
+constraint15( [_, Last, _, Time] ) :-
+	one_set( [First, Last, _, _] ),
+	Time = 185,
+	Last \= huber.
+
+%
+% END OF SUCKVILLE
+%%%%%
 
 one_set( [A, B, C, D] ) :-
 	first(A),
