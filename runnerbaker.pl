@@ -52,7 +52,6 @@ solution( X ) :-
 	constraint3( Constrained5 ),
 	member( Constrained6, X ),
 	constraint3( Constrained6 ),
-
 	member( Constrained7A, X ),
 	member( Constrained7B, X ),
 	constraint7( Constrained7A, Constrained7B ),
@@ -68,14 +67,12 @@ solution( X ) :-
 	constraint11( Constrained11 ),
 	member( Constrained12, X ),
 	constraint12( Constrained12 ),
-
 	member( Constrained13a, X ),
 	member( Constrained13b, X ),
 	member( Constrained13c, X ),
 	member( Constrained13d, X ),
 	member( Constrained13e, X ),
-	constraint13( Constrained13a, Constrained13b, Constrained13c, Constrained13d, Constrained13e )
-
+	constraint13( Constrained13a, Constrained13b, Constrained13c, Constrained13d, Constrained13e ),
 	all_Nth_members( X, 2, ListOfLastNames),
 	permutation( ListOfLastNames, [ chase, huber, larson, summers, velez ] ),
 	all_Nth_members( X, 3, ListOfCookies),
@@ -202,7 +199,7 @@ constraint12( [First, _, Cookie, _] ) :-
 %%%%%%%%%%%%
 % THIS PART SUCKS
 %
-*/
+/*
 constraint13( [First, _, Cookie, _] ) :-
 	one_set( [First, _, Cookie, _] ),
 	First = charlotte,
