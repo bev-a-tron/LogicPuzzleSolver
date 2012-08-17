@@ -38,27 +38,27 @@ all_Nth_members( [H|Rest], N, [This|RestFiltered] ) :-
         all_Nth_members( Rest, N, RestFiltered ).
 constraint1( [deandre, _, _, 194] ).
 constraint1b( [rodney, NotChase, NotOatmealRaisin, 188], [NotRodney, chase, oatmeal_raisin, Not188 ]) :-
-	NotOatmealRaisin /= oatmeal_raisin,
-	NotRodney /= rodney,
-	NotChase /= chase,
-	Not188 /= 188.
+	NotOatmealRaisin \= oatmeal_raisin,
+	NotRodney \= rodney,
+	NotChase \= chase,
+	Not188 \= 188.
 constraint1b( [rodney, chase, NotOatmealRaisin, Not188], [NotRodney, NotChase, oatmeal_raisin, 188 ]) :-
-	NotOatmealRaisin /= oatmeal_raisin,
-	NotRodney /= rodney,
-	NotChase /= chase,
-	Not188 /= 188.
+	NotOatmealRaisin \= oatmeal_raisin,
+	NotRodney \= rodney,
+	NotChase \= chase,
+	Not188 \= 188.
 constraint2( [_, chase, NotOatmealRaisin, Time1], [_, NotChase, oatmeal_raisin, Time2] ) :-
-	NotOatmealRaisin /= oatmeal_raisin,
-	NotChase /= chase,
+	NotOatmealRaisin \= oatmeal_raisin,
+	NotChase \= chase,
 	time(Time1),
 	time(Time2),
 	Time1 < Time2.
 constraint3( [NotSamuelOrCharlotte, velez, _, _] ) :-
-	NotSamuelOrCharlotte /= samuel,
-	NotSameulOrCharlotte /= charlotte.
+	NotSamuelOrCharlotte \= samuel,
+	NotSamuelOrCharlotte \= charlotte.
 constraint4( [_, NotHuber, black_and_white, Time1], [_, huber, NotBlackAndWhite, Time2] ) :-
-	NotHuber /= huber,
-	NotBlackAndWhite /= black_and_white,
+	NotHuber \= huber,
+	NotBlackAndWhite \= black_and_white,
 	time(Time1),
 	time(Time2),
 	Time1 < Time2.
@@ -76,7 +76,7 @@ constraint8( [Set1, Set2, Set3, Set4, Set5] ) :-
 	Set4 = [_, _, chocolate_chip, _],
 	Set5 = [_, _, _, 185].
 constraint9( [NotRodney, _, chocolate_chip, _] ) :-
-	NotRodney /= rodney.
+	NotRodney \=  rodney.
 
 solution3( X ) :-
 	constraint8( X ),
