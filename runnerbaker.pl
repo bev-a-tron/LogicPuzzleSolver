@@ -45,8 +45,16 @@ constraint13( [Set1, Set2, Set3, Set4, Set5] ) :-
 	Set5 = [_, _, _, 185].
 
 constraint1( [deandre, _, _, 194] ).
-constraint2( [rodney, _, Cookie, _] ) :-
-	Cookie \= oatmeal_raisin.
+constraint1b( [rodney, NotChase, NotOatmealRaisin, 188], [NotRodney, chase, oatmeal_raisin, Not188 ]) :-
+	NotOatmealRaisin /= oatmeal_raisin,
+	NotRodney /= rodney,
+	NotChase /= chase,
+	Not188 /= 188.
+constraint1b( [rodney, chase, NotOatmealRaisin, Not188], [NotRodney, NotChase, oatmeal_raisin, 188 ]) :-
+	NotOatmealRaisin /= oatmeal_raisin,
+	NotRodney /= rodney,
+	NotChase /= chase,
+	Not188 /= 188.
 constraint3( [_, chase, _, Time] ) :-
 	Time \= 188.
 constraint4( [_, chase, Cookie, _] ) :-
@@ -90,8 +98,9 @@ solution3( X ) :-
 	permutation( ListOfTimes, [ 179, 185, 188, 194, 199 ] ),
 	member( Constrained1, X ),
 	constraint1( Constrained1 ),
-	member( Constrained2, X ),
-	constraint2( Constrained2 ),
+	member( Constrained1b1, X ),
+	member( Constrained1b2, X ),
+	constraint1b( Constrained1b1, Constrained1b2 ),
 	member( Constrained3, X ),
 	constraint3( Constrained3 ),
 	member( Constrained4, X ),
