@@ -36,14 +36,6 @@ all_Nth_members( [], _, [] ).
 all_Nth_members( [H|Rest], N, [This|RestFiltered] ) :-
         nth1( N, H, This ),
         all_Nth_members( Rest, N, RestFiltered ).
-
-constraint13( [Set1, Set2, Set3, Set4, Set5] ) :-
-	Set1 = [charlotte, _, _, _],
-	Set2 = [sierra, _, _, _],
-	Set3 = [_, huber, _, _],
-	Set4 = [_, _, chocolate_chip, _],
-	Set5 = [_, _, _, 185].
-
 constraint1( [deandre, _, _, 194] ).
 constraint1b( [rodney, NotChase, NotOatmealRaisin, 188], [NotRodney, chase, oatmeal_raisin, Not188 ]) :-
 	NotOatmealRaisin /= oatmeal_raisin,
@@ -55,39 +47,39 @@ constraint1b( [rodney, chase, NotOatmealRaisin, Not188], [NotRodney, NotChase, o
 	NotRodney /= rodney,
 	NotChase /= chase,
 	Not188 /= 188.
-constraint3( [_, chase, _, Time] ) :-
-	Time \= 188.
-constraint4( [_, chase, Cookie, _] ) :-
-	Cookie \= oatmeal_raisin.
-constraint5( [samuel, Last, _, _] ) :-
-	Last \= velez.
-constraint6( [charlotte, Last, _, _] ) :-
-	Last \= velez.
-constraint7( X, Y ) :-
-	X = [_, chase, _, Time1],
-	Y = [_, _, oatmeal_raisin, Time2],
-	time( Time1 ),
-	time( Time2 ),
+constraint2( [_, chase, NotOatmealRaisin, Time1], [_, NotChase, oatmeal_raisin, Time2] ) :-
+	NotOatmealRaisin /= oatmeal_raisin,
+	NotChase /= chase,
+	time(Time1),
+	time(Time2),
 	Time1 < Time2.
-constraint8( X, Y ) :-
-	X = [_, huber, _, Time1], 
-	Y = [_, _, black_and_white, Time2],
-	time( Time1 ),
-	time( Time2 ),
-	Time2 < Time1.
-constraint9( [_, velez, _, 199] ).
-constraint10( X, Y ) :-
-	X = [_, summers, _, Time1],
-	Y = [_, chase, _, Time2],
-	time( Time1 ),
-	time( Time2 ),
+constraint3( [NotSamuelOrCharlotte, velez, _, _] ) :-
+	NotSamuelOrCharlotte /= samuel,
+	NotSameulOrCharlotte /= charlotte.
+constraint4( [_, NotHuber, black_and_white, Time1], [_, huber, NotBlackAndWhite, Time2] ) :-
+	NotHuber /= huber,
+	NotBlackAndWhite /= black_and_white,
+	time(Time1),
+	time(Time2),
 	Time1 < Time2.
-constraint11( [deandre, _, almond, _] ).
-constraint11( [deandre, _, oatmeal_raisin, _] ).
-constraint12( [rodney, _, chocolate_chip, _] ).
+constraint5( [_, velez, _, 199] ).
+constraint6( [_, summers, _, Time1], [_, chase, _, Time2] ) :-
+	time(Time1),
+	time(Time2),
+	Time1 < Time2.
+constraint7( [deandre, _, almond, _] ).
+constraint7( [deandre, _, oatmeal_raisin, _] ).
+constraint8( [Set1, Set2, Set3, Set4, Set5] ) :-
+	Set1 = [charlotte, _, _, _],
+	Set2 = [sierra, _, _, _],
+	Set3 = [_, huber, _, _],
+	Set4 = [_, _, chocolate_chip, _],
+	Set5 = [_, _, _, 185].
+constraint9( [NotRodney, _, chocolate_chip, _] ) :-
+	NotRodney /= rodney.
 
 solution3( X ) :-
-	constraint13( X ),
+	constraint8( X ),
 	all_Nth_members( X, 1, ListOfFirstNames),
 	permutation( ListOfFirstNames, [ charlotte, deandre, rodney, samuel, sierra ] ),
 	all_Nth_members( X, 2, ListOfLastNames),
@@ -101,72 +93,20 @@ solution3( X ) :-
 	member( Constrained1b1, X ),
 	member( Constrained1b2, X ),
 	constraint1b( Constrained1b1, Constrained1b2 ),
+	member( Constrained2a, X ),
+	member( Constrained2b, X ),
+	constraint2( Constrained2a, Constrained2b ),
 	member( Constrained3, X ),
 	constraint3( Constrained3 ),
-	member( Constrained4, X ),
-	constraint4( Constrained4 ),
+	member( Constrained4a, X ),
+	member( Constrained4b, X ),
+	constraint4( Constrained4a, Constrained4b ),
 	member( Constrained5, X ),
 	constraint5( Constrained5 ),
-	member( Constrained6, X ),
-	constraint6( Constrained6 ),
-	member( Constrained7A, X ),
-	member( Constrained7B, X ),
-	constraint7( Constrained7A, Constrained7B ),
-	member( Constrained8A, X ),
-	member( Constrained8B, X ),
-	constraint8( Constrained8A, Constrained8B ),
+	member( Constrained6a, X ),
+	member( Constrained6b, X ),
+	constraint6( Constrained6a, Constrained6b ),
+	member( Constrained7, X ),
+	constraint7( Constrained7 ),
 	member( Constrained9, X ),
-	constraint9( Constrained9 ),
-	member( Constrained10A, X ),
-	member( Constrained10B, X ),
-	constraint10( Constrained10A, Constrained10B ),
-	member( Constrained11, X ),
-	constraint11( Constrained11 ),
-	member( Constrained12, X ),
-	constraint12( Constrained12 ).
-
-solution( X ) :-
-	X = [ A, B, C, D, M ],
-%	X = [ [charlotte,_,_,_], [deandre,_,_,_], [rodney,_,_,_], [samuel,_,_,_], [sierra,_,_,_] ],
-	one_set( A ),
-	one_set( B ),
-	one_set( C ),
-	one_set( D ),
-	one_set( M ),
-	constraint13( X ),
-	all_Nth_members( X, 1, ListOfFirstNames),
-	permutation( ListOfFirstNames, [ charlotte, deandre, rodney, samuel, sierra ] ),
-	all_Nth_members( X, 2, ListOfLastNames),
-	permutation( ListOfLastNames, [ chase, huber, larson, summers, velez ] ),
-	all_Nth_members( X, 3, ListOfCookies),
-	permutation( ListOfCookies, [ almond, black_and_white, chocolate_chip, gingerbread, oatmeal_raisin ] ),
-	all_Nth_members( X, 4, ListOfTimes),
-	permutation( ListOfTimes, [ 179, 185, 188, 194, 199 ] ),
-	member( Constrained1, X ),
-	constraint1( Constrained1 ),
-	member( Constrained2, X ),
-	constraint2( Constrained2 ),
-	member( Constrained3, X ),
-	constraint3( Constrained3 ),
-	member( Constrained4, X ),
-	constraint4( Constrained4 ),
-	member( Constrained5, X ),
-	constraint5( Constrained5 ),
-	member( Constrained6, X ),
-	constraint6( Constrained6 ),
-	member( Constrained7A, X ),
-	member( Constrained7B, X ),
-	constraint7( Constrained7A, Constrained7B ),
-	member( Constrained8A, X ),
-	member( Constrained8B, X ),
-	constraint8( Constrained8A, Constrained8B ),
-	member( Constrained9, X ),
-	constraint9( Constrained9 ),
-	member( Constrained10A, X ),
-	member( Constrained10B, X ),
-	constraint10( Constrained10A, Constrained10B ),
-	member( Constrained11, X ),
-	constraint11( Constrained11 ),
-	member( Constrained12, X ),
-	constraint12( Constrained12 ).
-%	X = [ [charlotte,_,_,_], [deandre,_,_,_], [rodney,_,_,_], [samuel,_,_,_], [sierra,_,_,_] ],
+	constraint9( Constrained9 ).
